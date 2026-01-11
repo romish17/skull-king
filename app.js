@@ -356,3 +356,11 @@ if (state.currentRound > state.rounds) {
   state.currentRound = state.rounds;
 }
 renderAll();
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch((error) => {
+      console.warn('Service worker non enregistré', error);
+    });
+  });
+}

@@ -30,6 +30,16 @@ Application web mobile pour compter les points au jeu Skull King, avec support d
 
    - Puis ouvre : `http://localhost:8000`
 
+## Installation mobile (PWA)
+
+Pour une expérience proche d'une application mobile :
+
+1. Lance le serveur local (voir option B).
+2. Ouvre l'URL sur ton téléphone (même réseau ou via un tunnel si besoin).
+3. Dans le navigateur, choisis **Ajouter à l'écran d'accueil**.
+
+> Note : l'installation en PWA nécessite un serveur (HTTPS ou `localhost`). L'ouverture directe du fichier ne permet pas l'installation.
+
 ## Utilisation rapide
 
 - Ajoute ou supprime des joueurs dans la section **Équipage**.
