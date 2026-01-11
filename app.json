@@ -1,0 +1,18 @@
+{
+  "expo": {
+    "name": "Skull King",
+    "slug": "skull-king-mobile",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "backgroundColor": "#0b131b",
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#0b131b"
+      }
+    }
+  }
+}
