@@ -43,7 +43,8 @@ Pour une expérience proche d'une application mobile :
 ## Utilisation rapide
 
 - Ajoute ou supprime des joueurs dans la section **Équipage**.
-- Sélectionne la manche et saisis **annonce**, **plis**, et **bonus**.
+- Sélectionne la manche et saisis les **annonces** (phase Annonces).
+- Passe en **phase Résultats** pour saisir les **plis** et **bonus**, puis clique sur **Clôturer la manche**.
 - Clique sur une carte spéciale/extension pour ajouter son bonus au champ actif.
 - Ajuste les valeurs des cartes dans **Barème des cartes** pour coller à vos règles.
 - Les scores et réglages sont sauvegardés automatiquement sur l'appareil.

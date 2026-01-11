@@ -75,6 +75,7 @@ const state = {
   ],
   rounds: 10,
   currentRound: 1,
+  roundPhase: 'bids',
   cards: structuredClone(defaultCards),
 };
 
@@ -88,6 +89,9 @@ const cardGridEl = document.getElementById('card-grid');
 const bonusSettingsEl = document.getElementById('bonus-settings');
 const addPlayerBtn = document.getElementById('add-player');
 const resetBtn = document.getElementById('reset-game');
+const roundPhaseEl = document.getElementById('round-phase');
+const togglePhaseBtn = document.getElementById('toggle-phase');
+const completeRoundBtn = document.getElementById('complete-round');
 
 const clampNumber = (value, min = 0, max = 99) => {
   const parsed = Number.parseInt(value, 10);
@@ -108,6 +112,7 @@ const loadState = () => {
       state.players = saved.players;
       state.rounds = saved.rounds ?? state.rounds;
       state.currentRound = saved.currentRound ?? 1;
+      state.roundPhase = saved.roundPhase ?? 'bids';
       state.cards = saved.cards;
     }
   } catch (error) {
@@ -193,6 +198,13 @@ const renderRounds = () => {
   }
 };
 
+const renderRoundPhase = () => {
+  const isBids = state.roundPhase === 'bids';
+  roundPhaseEl.textContent = `Phase : ${isBids ? 'Annonces' : 'Résultats'}`;
+  togglePhaseBtn.textContent = isBids ? 'Passer aux résultats' : 'Retour aux annonces';
+  completeRoundBtn.disabled = isBids;
+};
+
 const renderScoreboard = () => {
   scoreboardEl.innerHTML = '';
   state.players.forEach((player) => {
@@ -212,6 +224,7 @@ const renderScoreboard = () => {
     bidInput.min = '0';
     bidInput.value = roundScore.bid;
     bidInput.placeholder = 'Annonce';
+    bidInput.disabled = state.roundPhase !== 'bids';
     bidInput.addEventListener('input', (event) => {
       roundScore.bid = clampNumber(event.target.value, 0, state.currentRound);
       updateScores();
@@ -222,6 +235,7 @@ const renderScoreboard = () => {
     trickInput.min = '0';
     trickInput.value = roundScore.tricks;
     trickInput.placeholder = 'Plis';
+    trickInput.disabled = state.roundPhase !== 'results';
     trickInput.addEventListener('input', (event) => {
       roundScore.tricks = clampNumber(event.target.value, 0, state.currentRound);
       updateScores();
@@ -231,6 +245,7 @@ const renderScoreboard = () => {
     bonusInput.type = 'number';
     bonusInput.value = roundScore.bonus;
     bonusInput.placeholder = 'Bonus';
+    bonusInput.disabled = state.roundPhase !== 'results';
     bonusInput.addEventListener('input', (event) => {
       roundScore.bonus = Number(event.target.value) || 0;
       updateScores();
@@ -305,6 +320,7 @@ const updateScores = () => {
 
 const renderAll = () => {
   renderRounds();
+  renderRoundPhase();
   renderPlayers();
   renderScoreboard();
   renderCardGrid();
@@ -331,12 +347,15 @@ resetBtn.addEventListener('click', () => {
     player.scores = {};
   });
   state.currentRound = 1;
+  state.roundPhase = 'bids';
   renderAll();
   saveState();
 });
 
 roundSelectEl.addEventListener('change', (event) => {
   state.currentRound = Number(event.target.value) || 1;
+  state.roundPhase = 'bids';
+  renderRoundPhase();
   renderScoreboard();
   saveState();
 });
@@ -347,6 +366,31 @@ roundCountEl.addEventListener('change', (event) => {
     state.currentRound = state.rounds;
   }
   renderRounds();
+  renderRoundPhase();
+  renderScoreboard();
+  saveState();
+});
+
+togglePhaseBtn.addEventListener('click', () => {
+  state.roundPhase = state.roundPhase === 'bids' ? 'results' : 'bids';
+  renderRoundPhase();
+  renderScoreboard();
+  saveState();
+});
+
+completeRoundBtn.addEventListener('click', () => {
+  if (state.roundPhase !== 'results') {
+    alert('Passe d’abord à la phase résultats pour clôturer la manche.');
+    return;
+  }
+  if (state.currentRound >= state.rounds) {
+    alert('Dernière manche atteinte. Ajuste la ronde maximale si besoin.');
+    return;
+  }
+  state.currentRound += 1;
+  state.roundPhase = 'bids';
+  renderRounds();
+  renderRoundPhase();
   renderScoreboard();
   saveState();
 });

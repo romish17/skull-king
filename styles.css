@@ -150,6 +150,18 @@ main {
   margin-bottom: 16px;
 }
 
+.round-actions {
+  display: grid;
+  gap: 8px;
+  align-content: start;
+}
+
+.round-phase {
+  margin: 0;
+  font-weight: 600;
+  color: var(--accent);
+}
+
 .field {
   display: grid;
   gap: 6px;
