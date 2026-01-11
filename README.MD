@@ -29,6 +29,28 @@ Application mobile (iOS & Android) pour compter les points au jeu Skull King, av
      - iOS : `npm run ios`
      - Android : `npm run android`
 
+## Dépannage : erreur EMFILE (too many open files)
+
+Si Metro affiche `EMFILE: too many open files`, active Watchman ou augmente la limite de fichiers :
+
+1. Installer Watchman (macOS) :
+
+   ```bash
+   brew install watchman
+   ```
+
+2. Relancer le bundler avec Watchman :
+
+   ```bash
+   npm run start:watchman
+   ```
+
+3. Si besoin, augmenter la limite de fichiers ouverts :
+
+   ```bash
+   ulimit -n 10240
+   ```
+
 ## Utilisation rapide
 
 - Ajoute ou supprime des joueurs dans la section **Équipage**.
