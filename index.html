@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0b131b" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>Skull King - Compteur de points pirate</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icons/icon-192.svg" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="hero">
+    <div class="hero__content">
+      <p class="hero__eyebrow">Capitaine du score</p>
+      <h1>Skull King</h1>
+      <p class="hero__subtitle">Compteur de points mobile avec un thème pirate et les cartes d'extension.</p>
+      <div class="hero__actions">
+        <button id="add-player" class="btn btn--primary">Ajouter un joueur</button>
+        <button id="reset-game" class="btn btn--ghost">Réinitialiser la partie</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="panel">
+      <div class="panel__header">
+        <h2>Équipage</h2>
+        <p>Ajoute jusqu'à 8 joueurs. Les scores sont sauvegardés sur cet appareil.</p>
+      </div>
+      <div id="player-list" class="player-list"></div>
+    </section>
+
+    <section class="panel">
+      <div class="panel__header">
+        <h2>Manche en cours</h2>
+        <p>Saisis les annonces, plis réalisés et bonus pour chaque joueur.</p>
+      </div>
+      <div class="round-controls">
+        <label class="field">
+          <span>Manche</span>
+          <select id="round-select"></select>
+        </label>
+        <label class="field">
+          <span>Ronde maximale</span>
+          <select id="round-count"></select>
+        </label>
+        <div class="round-actions">
+          <p id="round-phase" class="round-phase">Phase : Annonces</p>
+          <button id="toggle-phase" class="btn btn--ghost" type="button">Passer aux résultats</button>
+          <button id="complete-round" class="btn btn--primary" type="button">Clôturer la manche</button>
+        </div>
+      </div>
+      <div class="scoreboard" id="scoreboard"></div>
+    </section>
+
+    <section class="panel">
+      <div class="panel__header">
+        <h2>Cartes spéciales &amp; extensions</h2>
+        <p>Clique sur une carte pour appliquer son bonus au champ actif.</p>
+      </div>
+      <div class="card-grid" id="card-grid"></div>
+    </section>
+
+    <section class="panel">
+      <div class="panel__header">
+        <h2>Barème des cartes</h2>
+        <p>Modifie les valeurs pour coller à votre extension ou variante maison.</p>
+      </div>
+      <div class="bonus-settings" id="bonus-settings"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Que les vents te soient favorables, capitaine ⚓️</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
