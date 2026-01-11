@@ -45,7 +45,14 @@ Si Metro affiche `EMFILE: too many open files`, active Watchman ou augmente la l
    npm run start:watchman
    ```
 
-3. Si besoin, augmenter la limite de fichiers ouverts :
+3. Réinitialiser les watches Watchman si besoin :
+
+   ```bash
+   watchman watch-del-all
+   watchman watch-project .
+   ```
+
+4. Si besoin, augmenter la limite de fichiers ouverts :
 
    ```bash
    ulimit -n 10240
